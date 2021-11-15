@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { MoviedatabaseService } from '../api/moviedatabase.service';
 import { LoadingController } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
+import { SearchOptionsPage } from '../search-options/search-options.page';
 
 @Component({
   selector: 'app-Search',
@@ -12,7 +14,7 @@ export class SearchPage {
   MovieInfo: any
   loadingDialog: any // any = obecný datový typ, použijeme ho vždy když nechceme datový typ řešit.
   modal: any
-  constructor(private movieDatabaseService: MoviedatabaseService, public loadingController: LoadingController) {}
+  constructor(private movieDatabaseService: MoviedatabaseService, public loadingController: LoadingController, public modalController: ModalController) {}
   public btnSearchClicked(): void {
     if (this.myinput.length >= 2) {
       this.presentLoading();
@@ -30,6 +32,12 @@ export class SearchPage {
       });
     await this.loadingDialog.present();
   }
-
+  async presentModal() {
+    const modal = await this.modalController.create({
+      component: SearchOptionsPage,
+      cssClass: 'my-custom-modal-css'
+    });
+    return await modal.present();
+  }
 }
 
