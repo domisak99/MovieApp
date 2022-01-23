@@ -11,6 +11,6 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let item of searchHistoryList">{{item}}</ion-item>
+    <ion-item *ngFor="let item of searchHistoryList"><ion-router-link (click)="searchFromHistory(item)">{{item}}</ion-router-link></ion-item>
   </ion-list>
 </ion-content>

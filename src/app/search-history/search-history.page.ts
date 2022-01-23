@@ -10,26 +10,21 @@ import { ArrayType } from '@angular/compiler';
 })
 export class SearchHistoryPage implements OnInit {
   searchHistoryList: any
-  searchITEM: string
+  //searchItem: string
   constructor(public modalController: ModalController) { 
     this.getSearchHistory();
-  }
-  ModalClose() {
-    this.modalController.dismiss();
   }
   async getSearchHistory() {
     const { value } = await Storage.get({ key: 'searchhistory' });
     this.searchHistoryList = value.split(",").filter(String);
   };
-  async searchFromHistory() {
-    if (this.searchITEM != null) {
-      await Storage.set({
-        key: 'type',
-        value: this.searchITEM,
-      });
-    }
-  };
-  ngOnInit() {
+  searchFromHistory(searchItem: string) {
+    this.modalController.dismiss(searchItem);
   }
-
+  ModalClose() {
+    this.modalController.dismiss();
+  }
+  ngOnInit(): void {
+      
+  }
 }
