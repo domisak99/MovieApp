@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 
-import { SearchPage } from './Search.page';
+import { SearchPage } from './search.page';
 
 describe('SearchPage', () => {
   let component: SearchPage;
