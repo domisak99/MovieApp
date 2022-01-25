@@ -1,17 +1,61 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 1
+      MovieApp
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="reload();">
+        <ion-icon style="font-size: 30px;" name="reload-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">MovieApp</ion-title>
     </ion-toolbar>
   </ion-header>
+  <br>
+  <ion-item>
+    <ion-label>Random:</ion-label>
+    <ion-select [value]="movie" [(ngModel)]="selectItem" (ionChange)="rand10Items(selectItem);">
+      <ion-select-option value="movies">Movies</ion-select-option>
+      <ion-select-option value="series">Series</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-slides *ngIf="selectItem=='movies'">
+    <ion-slide *ngFor="let movie of randMovieList">
+      <div class="slide">
+        <img [src]="movie.image" />
+        <h2>{{movie.name}}</h2>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <ion-slides *ngIf="selectItem=='series'">
+    <ion-slide *ngFor="let serie of randSeriesList">
+      <div class="slide">
+        <img [src]="serie.image" />
+        <h2>{{serie.name}}</h2>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <!--<ion-slides *ngIf="selectItem=='people'">
+    <ion-slide *ngFor="let movie of randPeopleList">
+      <div class="slide">
+        <img [src]="movie.image" />
+        <h2>{{movie.name}}</h2>
+      </div>
+    </ion-slide>
+  </ion-slides>
+  <ion-slides *ngIf="selectItem=='companies'">
+    <ion-slide *ngFor="let movie of randCompanyList">
+      <div class="slide">
+        <img [src]="movie.image" />
+        <h2>{{movie.name}}</h2>
+      </div>
+    </ion-slide>*/
+  </ion-slides>-->
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
 </ion-content>
