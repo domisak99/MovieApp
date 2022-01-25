@@ -9,7 +9,11 @@ const routes: Routes = [
   {
     path: 'search-options',
     loadChildren: () => import('./search-options/search-options.module').then( m => m.SearchOptionsPageModule)
+  },  {
+    path: 'search-history',
+    loadChildren: () => import('./search-history/search-history.module').then( m => m.SearchHistoryPageModule)
   }
+
 ];
 @NgModule({
   imports: [
