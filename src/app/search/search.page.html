@@ -1,39 +1,61 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Search movie
-    </ion-title>
+    <ion-title>Search movie</ion-title>
+        <!--<ion-row>
+          <ion-col size="8.2" size-md>
+            <ion-input [(ngModel)]="myinput" placeholder="Movie name... "></ion-input>
+          </ion-col>
+          <ion-col size="1.5" size-md>
+            <ion-button (click)="btnSearchClicked()">Search</ion-button>
+          </ion-col>
+        </ion-row>-->
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <ion-card>
-      <ion-row>
-        <ion-col size="8.6" size-md>
-          <ion-input [(ngModel)]="myinput" placeholder="Movie name... "></ion-input>
-        </ion-col>
-        <ion-col size="2" size-md>
-          <ion-button (click)="btnSearchClicked()">Search</ion-button>
-        </ion-col>
-      </ion-row>
-  </ion-card>
-  <ion-button expand="full" (click)="presentModal()">Options</ion-button>
+  <!--<ion-button expand="full" (click)="searchOptionsModal()">Options</ion-button>-->
+  <ion-searchbar [(ngModel)]="myinput" (keyup.enter)="btnSearchClicked()"></ion-searchbar>
+  <ion-router-link color="medium" (click)="searchOptionsModal()"style="float:left;">[Search options]</ion-router-link>
+  <ion-router-link color="medium" (click)="removeOptions2()"style="float:left;">[X]</ion-router-link>
+  <ion-router-link color="medium" (click)="searchHistoryModal()"style="float:right;">[Search history]</ion-router-link>
+  <br>
   <ion-card *ngFor="let movie of MovieInfo">
     <ion-card-header>
       <ion-img [src]='movie.image_url'></ion-img>
     </ion-card-header>
     <ion-card-content>
-      <ion-card-title>{{movie.name}}</ion-card-title>
       <ion-row>
-        <ion-col size="4">
-          <ion-icon name="star-outline" aria-hidden="true"></ion-icon>
-          <p>9.5/10</p>
-        </ion-col>
-        <ion-col size="8">{{movie.genres}}</ion-col>
+        <ion-col size="11" class="ion-text-start"><ion-card-title>{{movie.name}}</ion-card-title></ion-col>
+        <ion-col size="1" class="ion-text-start"><ion-button size="medium" color="danger" (click)="setFavouriteItem(movie.tvdb_id)"><ion-icon name="heart-outline"></ion-icon></ion-button></ion-col>
       </ion-row>
+      <ion-row>
+        <!--<ion-col size="4" class="ion-text-start">
+          <ion-row class="ion-text-start">
+            <ion-icon name="star-sharp"></ion-icon>
+            <p>9.5/10</p>
+          </ion-row>
+        </ion-col>-->
+        <ion-col size="4" class="ion-text-start">{{movie.type}}, {{movie.year}}</ion-col>
+        <ion-col size="8" class="ion-text-end">{{movie.genres}}</ion-col>
+      </ion-row>
+      <!--<p>{{movie.type}}</p><p>{{movie.year}}</p>-->
       {{movie.overview}}
     </ion-card-content>
   </ion-card>
-
 </ion-content>
+<script>
+  const searchbar = document.querySelector('ion-searchbar');
+  const items = btnSearchClicked();
+
+  searchbar.addEventListener('ionInput', handleInput);
+
+  function handleInput(event) {
+    const query = event.target.value.toLowerCase();
+    requestAnimationFrame(() => {
+      items.forEach((item) => {
+        const shouldShow = item.textContent.toLowerCase().indexOf(query) > -1;
+        item.style.display = shouldShow ? 'block' : 'none';
+      });
+    });
+  }
+</script>
