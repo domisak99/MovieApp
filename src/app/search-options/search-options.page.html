@@ -10,5 +10,29 @@
 </ion-header>
 
 <ion-content>
-
+  <br>
+  <ion-item>
+    <ion-label>Type:</ion-label>
+    <ion-select value="soType" [(ngModel)]="soType">
+      <ion-select-option value="movie">movie</ion-select-option>
+      <ion-select-option value="series">series</ion-select-option>
+      <ion-select-option value="person">person</ion-select-option>
+      <ion-select-option value="company">company</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <!--<ion-item>
+    <ion-label>Type:</ion-label>
+    <ion-input [(ngModel)]="soType" value="soType" type="text"></ion-input>
+  </ion-item>-->
+  <br>
+  <ion-item>
+    <ion-label>Year</ion-label>
+    <ion-datetime [(ngModel)]="soYear" value="soType" placeholder="Select" displayFormat="YYYY" min="1900" max="2021"></ion-datetime>
+  </ion-item>
+  <!--<ion-item>
+    <ion-label>Year:</ion-label>
+    <ion-input [(ngModel)]="soYear" value="soYear" type="number"></ion-input>
+  </ion-item>-->
+  <br>
+  <ion-button expand="full" (click)="setItem()">Apply</ion-button>
 </ion-content>
