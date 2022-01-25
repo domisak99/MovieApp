@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+import { SplashscreenComponent } from './splashscreen/splashscreen.component';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private modalController: ModalController) {
+      this.presentSplash();
+  }
+
+  async presentSplash() {
+    const modal = await this.modalController.create({
+      component: SplashscreenComponent,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+  
 }
