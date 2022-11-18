@@ -1,2 +1,3 @@
 prvni text
 druhy text
+test merge
